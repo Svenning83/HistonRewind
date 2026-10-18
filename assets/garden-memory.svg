@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" role="img" aria-labelledby="title">
+  <title id="title">Illustration of a sunny garden with flowers and a little house</title>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#a8c8bd"/>
+      <stop offset="1" stop-color="#e8e8c2"/>
+    </linearGradient>
+    <linearGradient id="lawn" x2="0" y2="1">
+      <stop stop-color="#9eb485"/>
+      <stop offset="1" stop-color="#567c62"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".3" numOctaves="3" seed="14" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".12"/></feComponentTransfer>
+    </filter>
+    <g id="flower">
+      <path d="M0 0v41m0-18-9-8m9 15 11-9" fill="none" stroke="#496a54" stroke-width="4" stroke-linecap="round"/>
+      <g fill="#efd29b">
+        <ellipse cx="0" cy="-11" rx="7" ry="11"/>
+        <ellipse cx="10" cy="-3" rx="7" ry="11" transform="rotate(72 10 -3)"/>
+        <ellipse cx="6" cy="9" rx="7" ry="11" transform="rotate(144 6 9)"/>
+        <ellipse cx="-7" cy="8" rx="7" ry="11" transform="rotate(216 -7 8)"/>
+        <ellipse cx="-10" cy="-4" rx="7" ry="11" transform="rotate(288 -10 -4)"/>
+      </g>
+      <circle r="6" fill="#a75f46"/>
+    </g>
+  </defs>
+  <rect width="900" height="720" fill="url(#sky)"/>
+  <circle cx="686" cy="151" r="79" fill="#f7e2a5" opacity=".85"/>
+  <path d="M0 170c40-24 87-27 123-15 34 11 68 11 108-2 43-14 87-11 124 15-52-9-88 0-128 12-38 11-76 11-112 1C76 169 37 166 0 179z" fill="#f4efd5" opacity=".74"/>
+  <path d="M0 347c92-60 187-73 281-52 70 15 124 17 190-5 102-34 195-15 266 35 55-8 113-2 163 19v115H0z" fill="#8eaa91"/>
+  <path d="M0 395c110-41 193-31 290 3 97 34 186 33 272-1 108-42 230-48 338-2v123H0z" fill="#6d956f"/>
+  <path d="M180 347l176-120 176 119v218H180z" fill="#ead0a0"/>
+  <path d="M162 350l194-139 193 139-18 18-175-126-176 126z" fill="#ae7659"/>
+  <path d="M239 344h100v117H239zm135 0h100v117H374z" fill="#718d84" stroke="#f7e3ba" stroke-width="12"/>
+  <path d="M289 344v117m135-117v117m-185-60h100m35 0h100" stroke="#f7e3ba" stroke-width="8"/>
+  <path d="M340 564V442q0-17 18-17h60q18 0 18 17v122z" fill="#a7604b" stroke="#f5deb5" stroke-width="10"/>
+  <circle cx="419" cy="501" r="5" fill="#f3d79b"/>
+  <path d="M504 557V344l38-1v214z" fill="#dbb584"/>
+  <path d="M0 480c106-13 178 5 259 28 103 29 210 23 310-14 109-40 220-39 331-2v228H0z" fill="url(#lawn)"/>
+  <path d="M344 720c36-97 44-164 73-200 18-23 46-17 65 10 36 51 59 131 90 190z" fill="#dbc49a"/>
+  <path d="M381 720c28-96 39-160 57-189 13-22 29-22 44 0 31 49 49 119 71 189z" fill="#e8d3a8"/>
+  <path d="M0 574c75-56 144-53 210-20 55 28 107 38 161 30-74 37-144 39-214 16-58-18-103-10-157 12z" fill="#4e795e"/>
+  <path d="M900 559c-79-48-159-47-238-10-52 24-95 31-145 24 77 37 146 32 212 10 66-22 114-8 171 12z" fill="#4f795d"/>
+  <g fill="#55785e">
+    <circle cx="65" cy="398" r="108"/><circle cx="156" cy="396" r="81"/>
+    <circle cx="785" cy="385" r="112"/><circle cx="873" cy="419" r="88"/>
+  </g>
+  <g fill="#73966b" opacity=".9">
+    <circle cx="21" cy="356" r="76"/><circle cx="114" cy="347" r="89"/>
+    <circle cx="748" cy="336" r="92"/><circle cx="853" cy="372" r="97"/>
+  </g>
+  <path d="M84 480l-4 104m708-112 5 110" stroke="#576c53" stroke-width="14" stroke-linecap="round"/>
+  <path d="M27 681c29-44 59-43 88 1m14 17c30-41 55-38 77-2m494 0c30-45 55-45 84-3m17-20c26-30 51-28 76 1" fill="none" stroke="#9aaa70" stroke-width="38" stroke-linecap="round"/>
+  <g>
+    <use href="#flower" transform="translate(100 605) scale(1.3)"/>
+    <use href="#flower" transform="translate(164 642) scale(.94)"/>
+    <use href="#flower" transform="translate(229 588) scale(.8)"/>
+    <use href="#flower" transform="translate(682 621) scale(1.2)"/>
+    <use href="#flower" transform="translate(758 590) scale(.9)"/>
+    <use href="#flower" transform="translate(829 648) scale(1.28)"/>
+  </g>
+  <g fill="#cf8c71">
+    <circle cx="61" cy="600" r="8"/><circle cx="185" cy="592" r="6"/>
+    <circle cx="720" cy="670" r="8"/><circle cx="869" cy="589" r="7"/>
+  </g>
+  <rect width="900" height="720" filter="url(#grain)" opacity=".32"/>
+</svg>
