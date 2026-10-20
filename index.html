@@ -313,9 +313,10 @@
             <p class="contact-card-kicker">A good place to begin</p>
             <h3>Tell us what you have.</h3>
             <p class="contact-card-intro">A rough idea is enough.</p>
-            <p class="contact-availability" id="contact-availability">We are adding our direct contact details. For now, you can prepare an enquiry and copy it for later.</p>
-            <a class="direct-email" id="direct-email" hidden></a>
-            <form id="enquiry-form">
+            <p class="contact-availability">Send us a note using the form, or email <a href="mailto:histonrewind@gmail.com">histonrewind@gmail.com</a>.</p>
+            <form id="enquiry-form" action="https://formsubmit.co/histonrewind@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New Histon Rewind enquiry">
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
               <div class="form-row">
                 <div class="form-field">
                   <label for="customer-name">Your name <span aria-hidden="true">*</span></label>
@@ -334,16 +335,9 @@
                 <label for="customer-message">What would you like us to help with? <span aria-hidden="true">*</span></label>
                 <textarea id="customer-message" name="message" rows="4" maxlength="2000" placeholder="For example: I have three VHS tapes and a few boxes of slides..." required></textarea>
               </div>
-              <button class="button button-primary form-submit" type="submit" disabled>Prepare my enquiry <span aria-hidden="true">&rarr;</span></button>
-              <p class="form-privacy">Nothing is sent or stored by this website when you prepare an enquiry.</p>
+              <button class="button button-primary form-submit" type="submit">Send my enquiry <span aria-hidden="true">&rarr;</span></button>
+              <p class="form-privacy">Your details are sent to FormSubmit, which forwards them to us by email. Please do not include sensitive information.</p>
             </form>
-            <noscript><p class="form-privacy">The enquiry helper needs JavaScript. Direct contact details are being added.</p></noscript>
-            <div class="enquiry-result" id="enquiry-result" hidden>
-              <label for="enquiry-copy">Your enquiry is ready</label>
-              <textarea id="enquiry-copy" rows="8" readonly></textarea>
-              <button class="copy-button" id="copy-enquiry" type="button">Copy message</button>
-              <p id="enquiry-status" role="status" aria-live="polite"></p>
-            </div>
           </div>
         </div>
       </section>

@@ -15,6 +15,8 @@ class PageParser(HTMLParser):
         self.anchors = []
         self.assets = []
         self.submit_buttons = []
+        self.forms = []
+        self.form_fields = []
         self.text = []
 
     def handle_starttag(self, tag, attributes):
@@ -34,6 +36,10 @@ class PageParser(HTMLParser):
             if asset and not asset.startswith(("#", "http:", "https:", "data:")):
                 self.assets.append(asset)
 
+        if tag == "form":
+            self.forms.append(attrs)
+        if tag in ("input", "textarea") and attrs.get("name"):
+            self.form_fields.append(attrs)
         if tag == "button" and attrs.get("type") == "submit":
             self.submit_buttons.append(attrs)
 
@@ -81,9 +87,23 @@ class SiteSmokeTests(unittest.TestCase):
         self.assertNotIn('class="brand-mark"', html)
         self.assertIn('aria-label="Histon Rewind, back to top"', html)
 
-    def test_enquiry_cannot_submit_without_javascript(self):
+    def test_enquiry_posts_to_form_provider_without_javascript(self):
+        self.assertEqual(len(self.page.forms), 1)
+        self.assertEqual(self.page.forms[0]["action"], "https://formsubmit.co/histonrewind@gmail.com")
+        self.assertEqual(self.page.forms[0]["method"], "POST")
+        self.assertTrue({"name", "email", "phone", "message", "_subject", "_honey"}.issubset(
+            {field["name"] for field in self.page.form_fields}
+        ))
+        for field in self.page.form_fields:
+            if field["name"] in ("name", "email", "message"):
+                self.assertIn("required", field)
         self.assertEqual(len(self.page.submit_buttons), 1)
-        self.assertIn("disabled", self.page.submit_buttons[0])
+        self.assertNotIn("disabled", self.page.submit_buttons[0])
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        script = (ROOT / "script.js").read_text(encoding="utf-8")
+        self.assertIn('href="mailto:histonrewind@gmail.com"', html)
+        self.assertIn("Your details are sent to FormSubmit", html)
+        self.assertNotIn('enquiryForm.addEventListener("submit"', script)
 
 
 if __name__ == "__main__":

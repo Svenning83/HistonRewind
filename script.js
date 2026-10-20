@@ -1,8 +1,5 @@
 "use strict";
 
-// Add a confirmed business email here to enable direct mail enquiries.
-const CONTACT_EMAIL = "";
-
 const menuButton = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
 
@@ -137,67 +134,6 @@ document.getElementById("use-estimate").addEventListener("click", () => {
     ? `Hello Histon Rewind,\n\nI would like to ask about digitising ${items.join(", ")}. The website estimated ${estimateAmount.textContent}. Could you let me know the next steps?`
     : "Hello Histon Rewind,\n\nI would like to ask about digitising some family memories. Could you let me know the next steps?";
   messageField.dataset.estimateDraft = "true";
-});
-
-const enquiryForm = document.getElementById("enquiry-form");
-const enquiryResult = document.getElementById("enquiry-result");
-const enquiryCopy = document.getElementById("enquiry-copy");
-const enquiryStatus = document.getElementById("enquiry-status");
-
-if (CONTACT_EMAIL) {
-  document.getElementById("contact-availability").textContent =
-    "Preparing an enquiry will open your email app so you can send it to us. You can also copy the message below.";
-  const emailLink = document.getElementById("direct-email");
-  emailLink.href = `mailto:${CONTACT_EMAIL}`;
-  emailLink.textContent = CONTACT_EMAIL;
-  emailLink.hidden = false;
-}
-
-enquiryForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const name = document.getElementById("customer-name").value.trim();
-  const email = document.getElementById("customer-email").value.trim();
-  const phone = document.getElementById("customer-phone").value.trim();
-  const message = messageField.value.trim();
-  enquiryCopy.value = [
-    `Hello Histon Rewind,`,
-    "",
-    message,
-    "",
-    `From: ${name}`,
-    `Email: ${email}`,
-    ...(phone ? [`Phone: ${phone}`] : []),
-  ].join("\n");
-  enquiryResult.hidden = false;
-  enquiryStatus.textContent = CONTACT_EMAIL
-    ? "Your email app should open. If it does not, you can copy the message instead."
-    : "Your message is ready to copy. Direct contact details will be added soon.";
-
-  if (CONTACT_EMAIL) {
-    const subject = encodeURIComponent(`Histon Rewind enquiry from ${name}`);
-    const body = encodeURIComponent(enquiryCopy.value);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  } else {
-    enquiryResult.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-});
-enquiryForm.querySelector(".form-submit").disabled = false;
-
-document.getElementById("copy-enquiry").addEventListener("click", async () => {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(enquiryCopy.value);
-    } else {
-      enquiryCopy.select();
-      if (!document.execCommand("copy")) throw new Error("Copy unavailable");
-    }
-    enquiryStatus.textContent = "Copied. You can paste your message wherever you need it.";
-  } catch {
-    enquiryCopy.focus();
-    enquiryCopy.select();
-    enquiryStatus.textContent = "Select the message above and copy it with Ctrl+C (or Command+C).";
-  }
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
