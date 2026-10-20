@@ -111,18 +111,20 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
   display: inline-flex;
   align-items: center;
   flex: none;
-  gap: 10px;
   color: var(--ink);
   white-space: nowrap;
 }
-.brand-mark { width: 43px; height: 43px; }
-.brand-name {
-  font-family: var(--display);
-  font-size: 27px;
-  letter-spacing: -.045em;
-  line-height: 1;
+.brand-chevrons {
+  margin-right: 12px;
+  color: var(--rust);
+  font: 800 32px/1 "Avenir Next", "Century Gothic", "Trebuchet MS", sans-serif;
+  letter-spacing: -.34em;
 }
-.brand-name em { color: var(--rust); font-weight: 400; }
+.brand-name {
+  font: 800 25px/1 "Avenir Next", "Century Gothic", "Trebuchet MS", sans-serif;
+  letter-spacing: -.075em;
+}
+.brand-name span { color: var(--rust); }
 .site-nav {
   display: flex;
   align-items: center;
@@ -987,7 +989,7 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
   padding-block: 48px 42px;
 }
 .footer-brand .brand { color: #f8f2e7; }
-.footer-brand .brand-name em { color: #e8ae82; }
+.footer-brand .brand-chevrons, .footer-brand .brand-name span { color: #e8ae82; }
 .footer-brand > p { max-width: 245px; margin-top: 17px; color: #d0ded3; font-size: 14px; }
 .footer-nav { display: grid; grid-template-columns: repeat(2, max-content); gap: 13px 34px; align-content: start; }
 .footer-nav a { color: #f8f2e7; font-size: 14px; }
@@ -1047,7 +1049,6 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 
 @media (max-width: 1120px) {
   .header-inner { gap: 17px; }
-  .brand-name { font-size: 25px; }
   .site-nav { gap: 15px; }
   .site-nav a { font-size: 13px; }
   .header-cta { padding-inline: 14px; font-size: 12px; }
@@ -1159,7 +1160,7 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
   .top-note-inner span:last-child { display: none; }
   .header-inner { min-height: 69px; }
   .header-cta { display: none; }
-  .brand-mark { width: 38px; height: 38px; }
+  .brand-chevrons { font-size: 31px; }
   .brand-name { font-size: 24px; }
   .site-nav { padding-inline: 20px; }
   .hero-inner { padding-block: 46px 25px; }
@@ -1195,8 +1196,8 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 
 @media (max-width: 410px) {
   .container { width: calc(100% - 34px); }
-  .brand { gap: 6px; }
-  .brand-name { font-size: 22px; }
+  .brand-chevrons { font-size: 30px; }
+  .brand-name { font-size: 23px; }
   .hero h1 { font-size: 51px; }
   .hero-art { min-height: 350px; }
   .photo-print { width: 80%; }

@@ -74,6 +74,13 @@ class SiteSmokeTests(unittest.TestCase):
         self.assertIn(".cassette.is-playing .cassette-reel", styles)
         self.assertIn(".comparison-after img { filter:", styles)
 
+    def test_live_wordmark_matches_signal_colour_study(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(html.count('class="brand-chevrons" aria-hidden="true">&#9666;&#9666;</span>'), 2)
+        self.assertEqual(html.count('<span class="brand-name">HISTON<span>REWIND</span></span>'), 2)
+        self.assertNotIn('class="brand-mark"', html)
+        self.assertIn('aria-label="Histon Rewind, back to top"', html)
+
     def test_enquiry_cannot_submit_without_javascript(self):
         self.assertEqual(len(self.page.submit_buttons), 1)
         self.assertIn("disabled", self.page.submit_buttons[0])
