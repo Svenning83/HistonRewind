@@ -958,8 +958,23 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 .form-field textarea::placeholder { color: #70817b; opacity: 1; }
 .form-field input:focus,
 .form-field textarea:focus { border-color: var(--ink); outline: 2px solid rgba(33, 75, 70, .2); outline-offset: 1px; }
+.reply-note { margin: 3px 0 14px; color: var(--ink); font-size: 14px; font-weight: 700; }
 .form-submit { justify-content: space-between; width: 100%; margin-top: 5px; }
 .form-privacy { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+
+.confirmation-page { display: flex; flex-direction: column; min-height: 100vh; }
+.confirmation-header { border-bottom: 1px solid var(--line); background: var(--cream); }
+.confirmation-header .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 90px; }
+.confirmation-back { border-bottom: 1px solid currentColor; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.confirmation-main { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); align-items: center; gap: clamp(35px, 7vw, 100px); flex: 1; padding-block: clamp(70px, 10vw, 140px); }
+.confirmation-kicker { color: var(--rust-deep); font-size: 12px; font-weight: 700; letter-spacing: .15em; }
+.confirmation-main h1 { max-width: 720px; margin-top: 25px; font-size: clamp(58px, 7vw, 105px); line-height: 1.02; letter-spacing: -.055em; }
+.confirmation-lead { max-width: 580px; margin: 28px 0 36px; color: var(--text); font-size: 19px; }
+.confirmation-aside { padding: 34px; border: 1px solid var(--line); border-left: 4px solid var(--rust); background: var(--cream); }
+.confirmation-aside > span { color: var(--rust-deep); font-size: 11px; font-weight: 700; letter-spacing: .15em; }
+.confirmation-aside p { margin-top: 19px; color: var(--text); font-size: 15px; }
+.confirmation-aside a { color: var(--rust-deep); font-weight: 700; text-decoration: underline; overflow-wrap: anywhere; }
+.confirmation-footer { padding-block: 22px; background: var(--ink); color: #f8f2e7; font-size: 13px; }
 
 .site-footer { background: var(--ink); color: #f8f2e7; }
 .footer-main {
@@ -1038,6 +1053,8 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 }
 
 @media (max-width: 920px) {
+  .confirmation-main { grid-template-columns: 1fr; }
+  .confirmation-aside { max-width: 610px; }
   .site-header { position: sticky; }
   .header-inner { min-height: 75px; }
   .menu-toggle {
@@ -1136,6 +1153,12 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 }
 
 @media (max-width: 560px) {
+  .confirmation-header .container { min-height: 75px; }
+  .confirmation-back { display: none; }
+  .confirmation-main { padding-block: 65px; }
+  .confirmation-main h1 { font-size: clamp(52px, 11vw, 70px); }
+  .confirmation-lead { font-size: 17px; }
+  .confirmation-aside { padding: 24px; }
   .top-note-inner { justify-content: center; text-align: center; }
   .top-note-inner span:last-child { display: none; }
   .header-inner { min-height: 69px; }
