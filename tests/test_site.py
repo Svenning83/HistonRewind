@@ -89,14 +89,14 @@ class SiteSmokeTests(unittest.TestCase):
 
     def test_enquiry_posts_to_form_provider_without_javascript(self):
         self.assertEqual(len(self.page.forms), 1)
-        self.assertEqual(self.page.forms[0]["action"], "https://formsubmit.co/histonrewind@gmail.com")
+        self.assertEqual(self.page.forms[0]["action"], "https://formspree.io/f/mljgqowe")
         self.assertEqual(self.page.forms[0]["method"], "POST")
-        self.assertTrue({"name", "email", "phone", "message", "_subject", "_next", "_honey"}.issubset(
+        self.assertTrue({"name", "email", "phone", "message", "_gotcha"}.issubset(
             {field["name"] for field in self.page.form_fields}
         ))
-        next_url = next(field["value"] for field in self.page.form_fields if field["name"] == "_next")
-        self.assertEqual(next_url, "https://histonrewind.co.uk/thank-you.html")
-        self.assertNotIn("_captcha", {field["name"] for field in self.page.form_fields})
+        self.assertFalse({"_subject", "_next", "_honey", "_captcha"} & {
+            field["name"] for field in self.page.form_fields
+        })
         for field in self.page.form_fields:
             if field["name"] in ("name", "email", "message"):
                 self.assertIn("required", field)
@@ -105,9 +105,13 @@ class SiteSmokeTests(unittest.TestCase):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "script.js").read_text(encoding="utf-8")
         self.assertIn('href="mailto:histonrewind@gmail.com"', html)
-        self.assertIn("Your details are sent to FormSubmit", html)
+        self.assertIn("Your details are sent to Formspree", html)
         self.assertIn("We aim to reply to all enquiries within 48 hours.", html)
-        self.assertNotIn('enquiryForm.addEventListener("submit"', script)
+        self.assertIn('id="enquiry-status" role="status" aria-live="polite" hidden', html)
+        self.assertIn('id="enquiry-success" hidden', html)
+        self.assertIn('enquiryForm.addEventListener("submit"', script)
+        self.assertIn('headers: { Accept: "application/json" }', script)
+        self.assertIn("if (!response.ok) throw", script)
 
     def test_thank_you_page_is_local_and_clear(self):
         page = PageParser()

@@ -136,6 +136,58 @@ document.getElementById("use-estimate").addEventListener("click", () => {
   messageField.dataset.estimateDraft = "true";
 });
 
+const enquiryForm = document.getElementById("enquiry-form");
+const submitButton = enquiryForm.querySelector(".form-submit");
+const submitLabel = submitButton.querySelector(".form-submit-label");
+const enquiryStatus = document.getElementById("enquiry-status");
+const enquiryStatusText = document.getElementById("enquiry-status-text");
+const enquiryFallback = document.getElementById("enquiry-fallback");
+const enquirySuccess = document.getElementById("enquiry-success");
+
+enquiryForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (submitButton.disabled) return;
+
+  submitButton.disabled = true;
+  submitLabel.textContent = "Sending your enquiry...";
+  enquiryStatus.classList.remove("is-error");
+  enquiryStatusText.textContent = "Sending your enquiry. Please wait for confirmation.";
+  enquiryFallback.hidden = true;
+  enquiryStatus.hidden = false;
+
+  const controller = new AbortController();
+  const slowTimer = setTimeout(() => {
+    enquiryStatusText.textContent = "Still waiting for Formspree. Please keep this page open.";
+  }, 10000);
+  const timeout = setTimeout(() => controller.abort(), 30000);
+
+  try {
+    const response = await fetch(enquiryForm.action, {
+      method: "POST",
+      body: new FormData(enquiryForm),
+      headers: { Accept: "application/json" },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error("Formspree did not accept the enquiry");
+
+    enquiryForm.reset();
+    enquiryStatus.hidden = true;
+    enquiryForm.hidden = true;
+    enquirySuccess.hidden = false;
+    enquirySuccess.querySelector("h4").focus();
+  } catch {
+    enquiryStatus.classList.add("is-error");
+    enquiryStatusText.textContent =
+      "We could not confirm delivery. Your message is still here, but it may have arrived. Please check with us before trying again.";
+    enquiryFallback.hidden = false;
+  } finally {
+    clearTimeout(slowTimer);
+    clearTimeout(timeout);
+    submitButton.disabled = false;
+    submitLabel.textContent = "Send my enquiry";
+  }
+});
+
 document.getElementById("year").textContent = new Date().getFullYear();
 
 if ("IntersectionObserver" in window && !reducedMotion.matches) {

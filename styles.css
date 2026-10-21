@@ -960,7 +960,14 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 .form-field textarea:focus { border-color: var(--ink); outline: 2px solid rgba(33, 75, 70, .2); outline-offset: 1px; }
 .reply-note { margin: 3px 0 14px; color: var(--ink); font-size: 14px; font-weight: 700; }
 .form-submit { justify-content: space-between; width: 100%; margin-top: 5px; }
+.form-submit:disabled { opacity: .75; cursor: wait; }
+.form-status { margin-top: 13px; padding: 12px 14px; border-left: 3px solid var(--ink); background: #edf3ec; color: var(--ink); font-size: 14px; line-height: 1.5; }
+.form-status.is-error { border-color: var(--rust); background: #f4ebdc; }
+.form-status a { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .form-privacy { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.enquiry-success { margin-top: 25px; padding: 25px; border-left: 4px solid var(--ink); background: #edf3ec; }
+.enquiry-success h4 { margin: 12px 0; font: 400 clamp(28px, 3vw, 37px)/1.15 var(--display); }
+.enquiry-success > p:last-child { color: var(--text); font-size: 16px; }
 
 .confirmation-page { display: flex; flex-direction: column; min-height: 100vh; }
 .confirmation-header { border-bottom: 1px solid var(--line); background: var(--cream); }

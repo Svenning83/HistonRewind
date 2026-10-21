@@ -314,10 +314,8 @@
             <h3>Tell us what you have.</h3>
             <p class="contact-card-intro">A rough idea is enough.</p>
             <p class="contact-availability">Send us a note using the form, or email <a href="mailto:histonrewind@gmail.com">histonrewind@gmail.com</a>.</p>
-            <form id="enquiry-form" action="https://formsubmit.co/histonrewind@gmail.com" method="POST">
-              <input type="hidden" name="_subject" value="New Histon Rewind enquiry">
-              <input type="hidden" name="_next" value="https://histonrewind.co.uk/thank-you.html">
-              <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
+            <form id="enquiry-form" action="https://formspree.io/f/mljgqowe" method="POST">
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden>
               <div class="form-row">
                 <div class="form-field">
                   <label for="customer-name">Your name <span aria-hidden="true">*</span></label>
@@ -337,9 +335,16 @@
                 <textarea id="customer-message" name="message" rows="4" maxlength="2000" placeholder="For example: I have three VHS tapes and a few boxes of slides..." required></textarea>
               </div>
               <p class="reply-note">We aim to reply to all enquiries within 48 hours.</p>
-              <button class="button button-primary form-submit" type="submit">Send my enquiry <span aria-hidden="true">&rarr;</span></button>
-              <p class="form-privacy">Your details are sent to FormSubmit, which forwards them to us by email. Please do not include sensitive information.</p>
+              <button class="button button-primary form-submit" type="submit"><span class="form-submit-label">Send my enquiry</span><span aria-hidden="true">&rarr;</span></button>
+              <p class="form-status" id="enquiry-status" role="status" aria-live="polite" hidden><span id="enquiry-status-text"></span> <a id="enquiry-fallback" href="mailto:histonrewind@gmail.com" hidden>Email us directly</a></p>
+              <p class="form-privacy">Your details are sent to Formspree, which forwards them to us by email. Please do not include sensitive information.</p>
+              <noscript><p class="form-privacy">After sending, Formspree will show a confirmation page.</p></noscript>
             </form>
+            <div class="enquiry-success" id="enquiry-success" hidden>
+              <p class="contact-card-kicker">Enquiry submitted</p>
+              <h4 tabindex="-1">Thank you for getting in touch.</h4>
+              <p>Formspree has accepted your enquiry. We aim to reply within 48 hours.</p>
+            </div>
           </div>
         </div>
       </section>
