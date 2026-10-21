@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 import unittest
 import xml.etree.ElementTree as ET
 
@@ -34,7 +35,7 @@ class PageParser(HTMLParser):
         if tag in ("img", "script", "link"):
             asset = attrs.get("src") or href
             if asset and not asset.startswith(("#", "http:", "https:", "data:")):
-                self.assets.append(asset)
+                self.assets.append(urlsplit(asset).path)
 
         if tag == "form":
             self.forms.append(attrs)
@@ -123,6 +124,13 @@ class SiteSmokeTests(unittest.TestCase):
         self.assertIn("Your enquiry has been submitted.", html)
         self.assertIn("We aim to reply to all emails within 48 hours.", html)
         self.assertIn("mailto:histonrewind@gmail.com", html)
+
+    def test_redirect_script_bypasses_stale_cache(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        script = (ROOT / "script.js").read_text(encoding="utf-8")
+        self.assertIn('src="script.js?v=5fbcd66"', html)
+        self.assertIn('window.location.assign("thank-you.html")', script)
+        self.assertNotIn('enquirySuccess.hidden = false', script)
 
 
 if __name__ == "__main__":

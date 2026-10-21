@@ -10,6 +10,7 @@ Run the basic content and asset checks with `python -B -m unittest discover -s t
 ## Before publishing
 
 - The form posts over HTTPS to Formspree at `https://formspree.io/f/mljgqowe`. After Formspree accepts an enquiry, JavaScript sends visitors to the branded `thank-you.html` page. Errors and timeouts show an uncertain-delivery warning on the form instead. Without JavaScript, the form posts normally and Formspree displays its own confirmation.
+- GitHub Pages/Cloudflare can cache `script.js` for hours. The homepage uses a versioned script URL; bump its `?v=` value in `index.html` whenever `script.js` changes so visitors receive the matching code.
 - Confirm the Formspree form delivers to `histonrewind@gmail.com`. After publishing, send a test enquiry and check both the on-page confirmation and the inbox (including spam). We have not sent a test from here. The direct email link remains available.
 - Formspree processes visitors' names, email addresses, optional phone numbers and messages. Review its terms/privacy practices and add an appropriate privacy notice before collecting customer data.
 - Replace the illustrations in `assets/` and the illustrative comparison in `index.html` with real, customer-approved video and image samples. The current artwork is deliberately labelled as illustration, not actual restoration work.
