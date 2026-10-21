@@ -108,10 +108,11 @@ class SiteSmokeTests(unittest.TestCase):
         self.assertIn("Your details are sent to Formspree", html)
         self.assertIn("We aim to reply to all enquiries within 48 hours.", html)
         self.assertIn('id="enquiry-status" role="status" aria-live="polite" hidden', html)
-        self.assertIn('id="enquiry-success" hidden', html)
+        self.assertNotIn('id="enquiry-success"', html)
         self.assertIn('enquiryForm.addEventListener("submit"', script)
         self.assertIn('headers: { Accept: "application/json" }', script)
         self.assertIn("if (!response.ok) throw", script)
+        self.assertIn('window.location.assign("thank-you.html")', script)
 
     def test_thank_you_page_is_local_and_clear(self):
         page = PageParser()

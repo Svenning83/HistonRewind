@@ -142,7 +142,6 @@ const submitLabel = submitButton.querySelector(".form-submit-label");
 const enquiryStatus = document.getElementById("enquiry-status");
 const enquiryStatusText = document.getElementById("enquiry-status-text");
 const enquiryFallback = document.getElementById("enquiry-fallback");
-const enquirySuccess = document.getElementById("enquiry-success");
 
 enquiryForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -161,6 +160,7 @@ enquiryForm.addEventListener("submit", async (event) => {
   }, 10000);
   const timeout = setTimeout(() => controller.abort(), 30000);
 
+  let accepted = false;
   try {
     const response = await fetch(enquiryForm.action, {
       method: "POST",
@@ -170,11 +170,10 @@ enquiryForm.addEventListener("submit", async (event) => {
     });
     if (!response.ok) throw new Error("Formspree did not accept the enquiry");
 
+    accepted = true;
     enquiryForm.reset();
-    enquiryStatus.hidden = true;
-    enquiryForm.hidden = true;
-    enquirySuccess.hidden = false;
-    enquirySuccess.querySelector("h4").focus();
+    enquiryStatusText.textContent = "Enquiry submitted. Opening your confirmation page...";
+    window.location.assign("thank-you.html");
   } catch {
     enquiryStatus.classList.add("is-error");
     enquiryStatusText.textContent =
@@ -183,9 +182,17 @@ enquiryForm.addEventListener("submit", async (event) => {
   } finally {
     clearTimeout(slowTimer);
     clearTimeout(timeout);
-    submitButton.disabled = false;
-    submitLabel.textContent = "Send my enquiry";
+    if (!accepted) {
+      submitButton.disabled = false;
+      submitLabel.textContent = "Send my enquiry";
+    }
   }
+});
+
+window.addEventListener("pageshow", (event) => {
+  submitButton.disabled = false;
+  submitLabel.textContent = "Send my enquiry";
+  if (event.persisted) enquiryStatus.hidden = true;
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();

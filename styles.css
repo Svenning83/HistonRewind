@@ -965,9 +965,6 @@ h1 em, h2 em { color: var(--rust); font-weight: 400; }
 .form-status.is-error { border-color: var(--rust); background: #f4ebdc; }
 .form-status a { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .form-privacy { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }
-.enquiry-success { margin-top: 25px; padding: 25px; border-left: 4px solid var(--ink); background: #edf3ec; }
-.enquiry-success h4 { margin: 12px 0; font: 400 clamp(28px, 3vw, 37px)/1.15 var(--display); }
-.enquiry-success > p:last-child { color: var(--text); font-size: 16px; }
 
 .confirmation-page { display: flex; flex-direction: column; min-height: 100vh; }
 .confirmation-header { border-bottom: 1px solid var(--line); background: var(--cream); }
