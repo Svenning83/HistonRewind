@@ -95,7 +95,7 @@ class SiteSmokeTests(unittest.TestCase):
             {field["name"] for field in self.page.form_fields}
         ))
         next_url = next(field["value"] for field in self.page.form_fields if field["name"] == "_next")
-        self.assertEqual(next_url, "https://svenning83.github.io/HistonRewind/thank-you.html")
+        self.assertEqual(next_url, "https://histonrewind.co.uk/thank-you.html")
         captcha = next(field["value"] for field in self.page.form_fields if field["name"] == "_captcha")
         self.assertEqual(captcha, "false")
         for field in self.page.form_fields:
