@@ -10,6 +10,7 @@ Run the basic content and asset checks with `python -B -m unittest discover -s t
 ## Before publishing
 
 - The form posts over HTTPS to FormSubmit, a third-party service that forwards enquiries to `histonrewind@gmail.com`. Its `_next` field redirects accepted submissions to `thank-you.html` on the GitHub Pages site. The recipient has confirmed activation; after publishing changes, send a test enquiry and check that the confirmation page loads and the email arrives (including spam). We have not sent a test from here. Visitors can also email the address directly.
+- FormSubmit's `_captcha` option is disabled to avoid a separate "I'm not a robot" page. The hidden `_honey` spam trap remains, but removing CAPTCHA can increase spam; monitor the inbox.
 - FormSubmit processes visitors' names, email addresses, optional phone numbers and messages. Review its terms/privacy practices and add an appropriate privacy notice before collecting customer data.
 - Replace the illustrations in `assets/` and the illustrative comparison in `index.html` with real, customer-approved video and image samples. The current artwork is deliberately labelled as illustration, not actual restoration work.
 - Replace the "customer stories coming soon" note with genuine testimonials only after getting permission to publish them.
