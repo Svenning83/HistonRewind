@@ -91,13 +91,12 @@ class SiteSmokeTests(unittest.TestCase):
         self.assertEqual(len(self.page.forms), 1)
         self.assertEqual(self.page.forms[0]["action"], "https://formsubmit.co/histonrewind@gmail.com")
         self.assertEqual(self.page.forms[0]["method"], "POST")
-        self.assertTrue({"name", "email", "phone", "message", "_subject", "_next", "_captcha", "_honey"}.issubset(
+        self.assertTrue({"name", "email", "phone", "message", "_subject", "_next", "_honey"}.issubset(
             {field["name"] for field in self.page.form_fields}
         ))
         next_url = next(field["value"] for field in self.page.form_fields if field["name"] == "_next")
         self.assertEqual(next_url, "https://histonrewind.co.uk/thank-you.html")
-        captcha = next(field["value"] for field in self.page.form_fields if field["name"] == "_captcha")
-        self.assertEqual(captcha, "false")
+        self.assertNotIn("_captcha", {field["name"] for field in self.page.form_fields})
         for field in self.page.form_fields:
             if field["name"] in ("name", "email", "message"):
                 self.assertIn("required", field)
